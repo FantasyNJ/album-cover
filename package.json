@@ -16,7 +16,6 @@
     "core-js": "^2.6.5",
     "file-saver": "^2.0.2",
     "music-metadata-browser": "^1.6.0",
-    "react-native-fs": "^2.14.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
