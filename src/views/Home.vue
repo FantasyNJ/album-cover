@@ -21,7 +21,7 @@
 
 <script>
 import ID3Writer from 'browser-id3-writer'
-import '../../public/jsmediatags.min.js'
+import * as mm from 'music-metadata-browser'
 import axios from 'axios'
 import FileSaver from 'file-saver'
 
@@ -44,8 +44,8 @@ export default {
       console.log(file)
       this.arrayBuffer = await this.readFile(file)
       // 获取歌曲文件meta
-      const tag = await this.jsmediatagsRead(file)
-      const { title, album } = tag.tags
+      const metadata = await mm.parseBlob(file)
+      const { title, album } = metadata.common
       this.title = title
       this.album = album
       this.handleSearch()
@@ -116,18 +116,6 @@ export default {
           reject(reader.error)
         }
         reader.readAsArrayBuffer(file)
-      })
-    },
-    jsmediatagsRead (file) {
-      return new Promise((resolve, reject) => {
-        window.jsmediatags.read(file, {
-          onSuccess (tag) {
-            resolve(tag)
-          },
-          onError (error) {
-            reject(error)
-          }
-        })
       })
     }
   }
