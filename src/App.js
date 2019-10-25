@@ -6,16 +6,16 @@ import FileSaver from 'file-saver'
 
 import './App.less'
 
+let title = ''
+let album = ''
+let fileArrayBuffer
+let file
+let songDetail
+
 function App() {
   const [songDetails, setSongDetails] = useState([])
   const [songId, setSongId] = useState('')
   const fileElem = useRef(null)
-
-  let title = ''
-  let album = ''
-  let fileArrayBuffer
-  let file
-  let songDetail
 
   async function handleFileChange () {
     console.log(fileElem, 'fileElem')
@@ -63,7 +63,7 @@ function App() {
       type: 'image/jpeg'
     }
     let imgFile = new File([data], `${songDetail.al.name}.jpg`, metadata)
-    const imgArrayBuffer = await this.readFile(imgFile)
+    const imgArrayBuffer = await readFile(imgFile)
     // 添加MP3信息
     const writer = new ID3Writer(fileArrayBuffer)
     writer
@@ -86,7 +86,7 @@ function App() {
     const taggedSongBuffer = writer.arrayBuffer
     const blob = writer.getBlob()
     const url = writer.getURL()
-    FileSaver.saveAs(blob, this.file.name)
+    FileSaver.saveAs(blob, file.name)
   }
 
   function readFile (file) {
