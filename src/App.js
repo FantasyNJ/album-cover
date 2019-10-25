@@ -83,9 +83,9 @@ function App() {
       .setFrame('TPE1', songDetail.ar.map(item => item.name))
     writer.addTag()
     // 下载mp3文件
-    const taggedSongBuffer = writer.arrayBuffer
+    // const taggedSongBuffer = writer.arrayBuffer
     const blob = writer.getBlob()
-    const url = writer.getURL()
+    // const url = writer.getURL()
     FileSaver.saveAs(blob, file.name)
   }
 
